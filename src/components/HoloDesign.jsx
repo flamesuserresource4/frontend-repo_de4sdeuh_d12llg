@@ -8,6 +8,8 @@ const HoloDesign = () => {
   const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1.05]);
   const blur = useTransform(scrollYProgress, [0, 1], [6, 0]);
   const opacity = useTransform(scrollYProgress, [0, 0.4, 1], [0, 1, 1]);
+  // Convert numeric blur MotionValue into a CSS filter string MotionValue
+  const blurFilter = useTransform(blur, (b) => `blur(${b}px)`);
 
   return (
     <section ref={ref} className="relative w-full bg-[#0b0c0e] py-24 text-white">
@@ -21,7 +23,7 @@ const HoloDesign = () => {
         </div>
 
         <motion.div
-          style={{ scale, opacity, filter: blur.to((b) => `blur(${b}px)`) }}
+          style={{ scale, opacity, filter: blurFilter }}
           className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-indigo-500/10 via-cyan-500/10 to-fuchsia-500/10 p-8"
         >
           <div className="grid gap-6 md:grid-cols-3">
